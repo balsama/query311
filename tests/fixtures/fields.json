@@ -1,0 +1,132 @@
+{
+  "fields": [
+    {
+      "type": "int4",
+      "id": "_id"
+    },
+    {
+      "type": "tsvector",
+      "id": "_full_text"
+    },
+    {
+      "type": "text",
+      "id": "case_enquiry_id"
+    },
+    {
+      "type": "text",
+      "id": "open_dt"
+    },
+    {
+      "type": "text",
+      "id": "sla_target_dt"
+    },
+    {
+      "type": "text",
+      "id": "closed_dt"
+    },
+    {
+      "type": "text",
+      "id": "on_time"
+    },
+    {
+      "type": "text",
+      "id": "case_status"
+    },
+    {
+      "type": "text",
+      "id": "closure_reason"
+    },
+    {
+      "type": "text",
+      "id": "case_title"
+    },
+    {
+      "type": "text",
+      "id": "subject"
+    },
+    {
+      "type": "text",
+      "id": "reason"
+    },
+    {
+      "type": "text",
+      "id": "type"
+    },
+    {
+      "type": "text",
+      "id": "queue"
+    },
+    {
+      "type": "text",
+      "id": "department"
+    },
+    {
+      "type": "text",
+      "id": "submitted_photo"
+    },
+    {
+      "type": "text",
+      "id": "closed_photo"
+    },
+    {
+      "type": "text",
+      "id": "location"
+    },
+    {
+      "type": "text",
+      "id": "fire_district"
+    },
+    {
+      "type": "text",
+      "id": "pwd_district"
+    },
+    {
+      "type": "text",
+      "id": "city_council_district"
+    },
+    {
+      "type": "text",
+      "id": "police_district"
+    },
+    {
+      "type": "text",
+      "id": "neighborhood"
+    },
+    {
+      "type": "text",
+      "id": "neighborhood_services_district"
+    },
+    {
+      "type": "text",
+      "id": "ward"
+    },
+    {
+      "type": "text",
+      "id": "precinct"
+    },
+    {
+      "type": "text",
+      "id": "location_street_name"
+    },
+    {
+      "type": "text",
+      "id": "location_zipcode"
+    },
+    {
+      "type": "text",
+      "id": "latitude"
+    },
+    {
+      "type": "text",
+      "id": "longitude"
+    },
+    {
+      "type": "text",
+      "id": "geom_4326"
+    },
+    {
+      "type": "text",
+      "id": "source"
+    }
+  ]
+}
