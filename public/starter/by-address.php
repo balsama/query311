@@ -1,3 +1,6 @@
+<?php
+$foo = 21;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,7 +34,7 @@
     <h1>Query!</h1>
     <div class="col-lg-8 px-0">
 
-        <form method="post" enctype="multipart/form-data" action="submit.php">
+        <form method="post" enctype="multipart/form-data" action="submit.php?XDEBUG_SESSION_START=annares">
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="table" value="e6013a93-1321-4f2a-bf91-8d8a02f1e62f" id="2023" checked>
@@ -62,9 +65,14 @@
                 <label class="form-check-label" for="2017">2017</label>
             </div>
 
-            <label class="form-label" for="address-contains">Address (contains)</label>
+
+            <label class="form-label" for="address-contains">Address (starts with)</label>
             <input type="text" class="form-control" placeholder="Address contains" aria-label="address-contains" name="address-contains" id="address-contains">
             <p>Case sensitive. Try <code>36 Hull</code> or <code>55 Boutwell</code>, for example</p>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="address-search-type" name="address-search-type">
+                <label class="form-check-label" for="count">Address "contains" (default: "starts with")</label>
+            </div>
 
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="count" name="count">
