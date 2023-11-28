@@ -24,7 +24,6 @@ class QueryTest extends \PHPUnit\Framework\TestCase
     {
         $foo = $this->query->getQuery();
         $url = 'https://data.boston.gov/api/3/action/datastore_search_sql?sql=' . $foo;
-        $bar = 21;
     }
 
 }

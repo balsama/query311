@@ -26,7 +26,7 @@ class Query311Builder
     public function getQuery(): string
     {
 
-        if ($this->type === 'string') {
+        if ($this->type === 'search') {
             $year = $this->submittedParams['table'];
             $zipCode = $this->submittedParams['zip-code'];
             $caseTitleContains = $this->submittedParams['case-title-contains'];
@@ -72,6 +72,9 @@ class Query311Builder
                     ->where(search('location')->$searchType($location))
                     ->compile();
             }
+        }
+        else {
+            throw new \Exception('Unrecognized form type');
         }
 
         $query = $this->insertParams($query->sql(), $query->params());
