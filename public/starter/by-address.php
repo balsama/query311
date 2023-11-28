@@ -1,6 +1,3 @@
-<?php
-$foo = 21;
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -72,11 +69,6 @@ $foo = 21;
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="address-search-type" name="address-search-type">
                 <label class="form-check-label" for="count">Address "contains" (default: "starts with")</label>
-            </div>
-
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="count" name="count">
-                <label class="form-check-label" for="count">Count results (rather than get actual records)</label>
             </div>
 
             <button class="btn btn-outline-info" type="submit" name="by-address">Query</button>

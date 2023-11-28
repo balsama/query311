@@ -74,11 +74,6 @@
             <label class="form-label" for="case-title-contains">...and date is before</label>
             <input type="date" class="form-control" value="2023-02-01" aria-label="date-before" name="date-before" id="date-before">
 
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="count" name="count">
-                <label class="form-check-label" for="count">Count results (rather than get actual records)</label>
-            </div>
-
             <button class="btn btn-outline-info" type="submit" name="search">Query</button>
         </form>
 
