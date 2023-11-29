@@ -33,23 +33,14 @@ class Query311Builder
             $after = $this->submittedParams['date-after'];
             $before = $this->submittedParams['date-before'];
 
-            if ($this->isCount) {
-                $query = $this->factory->select(func('COUNT', $year . '.case_title'))
-                    ->from($year)
-                    ->where(search('case_title')->contains($caseTitleContains))
-                    ->andWhere(field('location_zipcode')->eq($zipCode))
-                    ->andWhere(field('open_dt')->gte($after))
-                    ->andWhere(field('open_dt')->lte($before))
-                    ->compile();
-            } else {
-                $query = $this->factory->select($year . '.*')
-                    ->from($year)
-                    ->where(search('case_title')->contains($caseTitleContains))
-                    ->andWhere(field('location_zipcode')->eq($zipCode))
-                    ->andWhere(field('open_dt')->gte($after))
-                    ->andWhere(field('open_dt')->lte($before))
-                    ->compile();
-            }
+            $query = $this->factory->select($year . '.*')
+                ->from($year)
+                ->where(search('case_title')->contains($caseTitleContains))
+                ->andWhere(field('location_zipcode')->eq($zipCode))
+                ->andWhere(field('open_dt')->gte($after))
+                ->andWhere(field('open_dt')->lte($before))
+                ->compile();
+
         }
         elseif ($this->type === 'by-address') {
             $year = $this->submittedParams['table'];

@@ -1,12 +1,13 @@
 <?php
 
-include_once __DIR__ . "/../../vendor/autoload.php";
+include_once __DIR__ . "/../vendor/autoload.php";
 
 use Balsama\Fetch;
 
 $query = new \Balsama\Query311\Query311Builder($_POST);
+$sql = $query->getQuery();
 
-$url = "https://data.boston.gov/api/3/action/datastore_search_sql?sql=" . $query->getQuery();
+$url = "https://data.boston.gov/api/3/action/datastore_search_sql?sql=" . $sql;
 
 $result = Fetch::fetch($url);
 
@@ -16,7 +17,8 @@ $count = count($records);
 
 $template = <<<EOD
 <div class="col">
-<div class="card" style="width: 18rem;">
+<div class="card mb-2" style="width: 18rem;">
+  <span class="badge bg-{{COLOR}} position-absolute top-0 end-0 m-1">{{STATUS}}</span>
   <img src="{{IMAGE}}" class="card-img-top img-thumbnail" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{TITLE}}</h5>
@@ -34,9 +36,8 @@ EOD;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>311 Query Results</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
     <a class="navbar-brand" href="index.php">Boston 311 Record Search</a>
@@ -55,26 +56,42 @@ EOD;
     </div>
 </div>
 </nav>
+<main class="flex-shrink-0">
 <div class="container">
+    <p class="shadow bg-dark py-1 px-2"><span class="text-secondary">Query:</span><br><code><span class="text-info"><?php echo $sql; ?></span></code></p>
     <h1>Results:</h1>
-    <p>
-    <strong class="text-primary"><?php print number_format($count); ?></strong> records match your search:
-    </p>
+    <p><strong class="text-primary"><?php print number_format($count); ?></strong> records match your search:</p>
     <div class="row">
     <?php
     foreach ($records as $record) {
-        if (!$record->closed_photo) {
-            $image = 'https://placehold.co/600x400?text=Bos+311';
-        }
-        else {
-            $image = $record->closed_photo;
-        }
-        $item = str_replace(['{{IMAGE}}', '{{TITLE}}', '{{BODY}}', '{{LINK}}'], [$image, $record->open_dt . $record->case_enquiry_id . $record->type, $record->closure_reason, "https://311.boston.gov/tickets/" . $record->case_enquiry_id], $template);
+        $image = !$record->closed_photo ? 'https://placehold.co/600x400?text=Bos+311' : $record->closed_photo;
+        $status = $record->case_status;
+        $color = $status === 'Closed' ? 'success' : 'warning';
+        $item = str_replace(
+            [
+                '{{IMAGE}}',
+                '{{TITLE}}',
+                '{{BODY}}',
+                '{{LINK}}',
+                '{{STATUS}}',
+                '{{COLOR}}',
+            ],
+            [
+                $image,
+                $record->type,
+                $record->closure_reason,
+                "https://311.boston.gov/tickets/" . $record->case_enquiry_id,
+                $status,
+                $color,
+            ],
+            $template
+        );
         echo $item;
     }
     ?>
     </div>
 </div>
+</main>
 </body>
 </html>
 
