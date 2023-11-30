@@ -70,7 +70,7 @@ use Balsama\Query311\Helpers;
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="tab_zip" role="tabpanel" aria-labelledby="home-tab">
+                <div class="tab-pane active" id="tab_zip" role="tabpanel" aria-labelledby="home-tab">
                     <div class="input-group mb-3">
                        <div class="form-floating">
                         <input type="text" class="form-control" placeholder="Zip code" aria-label="zip-code" name="zip-code" id="zip-code">
@@ -153,7 +153,7 @@ use Balsama\Query311\Helpers;
                     </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="tab_address" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="tab-pane" id="tab_address" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" placeholder="Address contains" aria-label="address-contains" name="address-contains" id="address-contains">
                         <label class="form-label" for="address-contains">Address (starts with)</label>
