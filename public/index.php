@@ -19,7 +19,7 @@ use Balsama\Query311\Helpers;
       <meta property="og:url" content="http://localhost/query311/public/" />
       <meta property="og:title" content="Boston 311 Records Search" />
       <meta property="og:description" content="A tool to help you to search Boston's 311 records." />
-      <meta property="og:image" content="favicon/311Query.png" />
+      <meta property="og:image" content="https://query311-41292d25d8ea.herokuapp.com/favicon/311Query.png" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

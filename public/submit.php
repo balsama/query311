@@ -41,6 +41,17 @@ EOD;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>311 Query Results</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@balsama" />
+    <meta name="twitter:creator" content="@balsama" />
+    <meta property="og:url" content="http://localhost/query311/public/" />
+    <meta property="og:title" content="Boston 311 Records Search" />
+    <meta property="og:description" content="A tool to help you to search Boston's 311 records." />
+    <meta property="og:image" content="https://query311-41292d25d8ea.herokuapp.com/favicon/311Query.png" />
 </head>
 <body class="d-flex flex-column h-100">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
