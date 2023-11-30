@@ -63,7 +63,7 @@ use Balsama\Query311\Helpers;
 
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#tab_zip" type="button" role="tab" aria-controls="tab_zip" aria-selected="true">Search within Zip Code</button>
+                    <button class="nav-link active show" id="home-tab" data-bs-toggle="tab" data-bs-target="#tab_zip" type="button" role="tab" aria-controls="tab_zip" aria-selected="true">Search within Zip Code</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tab_address" type="button" role="tab" aria-controls="tab_address" aria-selected="false">Search by Address</button>
@@ -82,9 +82,9 @@ use Balsama\Query311\Helpers;
                             <option value="Bicycle">Abandoned Bicycle</option>
                             <option value="Building">Abandoned Building</option>
                             <option value="Vehicle">Abandoned Vehicle</option>
-                            <option value="Bed Bugs">Bed Bugs</option>
+                            <option value=" Bugs">Bed Bugs</option>
                             <option value="Broken Park Equipment">Broken Park Equipment</option>
-                            <option value="Broken Sidewalk">Broken Sidewalk</option>
+                            <option value="Sidewalk">Broken Sidewalk</option>
                             <option value="Building Inspection Request">Building Inspection Request</option>
                             <option value="BWSC">BWSC</option>
                             <option value="atchbasin">Catchbasin</option>
@@ -177,8 +177,8 @@ use Balsama\Query311\Helpers;
             </div>
             </div>
 
-
-            <button class="btn btn-outline-info" type="submit" value="search">Query</button>
+            <button class="btn btn-primary btn-lg" type="submit" value="search">Search</button>
+            <a href="index.php" class="btn btn-outline-primary btn-lg">Reset</a>
         </form>
 
       </div>
