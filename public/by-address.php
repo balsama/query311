@@ -30,7 +30,7 @@
     <h1>Query!</h1>
     <div class="col-lg-8 px-0">
 
-        <form method="post" enctype="multipart/form-data" action="submit.php">
+        <form method="get" enctype="multipart/form-data" action="submit.php">
 
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="table" value="e6013a93-1321-4f2a-bf91-8d8a02f1e62f" id="2023" checked>

@@ -3,12 +3,12 @@
 include_once __DIR__ . "/../vendor/autoload.php";
 
 use Balsama\Fetch;
+use Balsama\Query311\Query311Builder;
 
-$query = new \Balsama\Query311\Query311Builder($_POST);
+$query = new Query311Builder($_GET);
 $sql = $query->getQuery();
 
 $url = "https://data.boston.gov/api/3/action/datastore_search_sql?sql=" . $sql;
-
 $result = Fetch::fetch($url);
 
 $records = $result->result->records;
@@ -22,6 +22,11 @@ $template = <<<EOD
   <img src="{{IMAGE}}" class="card-img-top img-thumbnail" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{TITLE}}</h5>
+    <p>{{ADDRESS}}</p>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item small">Opened: {{OPENED}}</li>
+        <li class="list-group-item small">Closed: {{CLOSED}}</li>
+    </ul>
     <p class="card-text">{{BODY}}</p>
     <a href="{{LINK}}" class="btn btn-primary">View case</a>
   </div>
@@ -75,6 +80,9 @@ EOD;
                 '{{LINK}}',
                 '{{STATUS}}',
                 '{{COLOR}}',
+                '{{ADDRESS}}',
+                '{{OPENED}}',
+                '{{CLOSED}}',
             ],
             [
                 $image,
@@ -83,6 +91,9 @@ EOD;
                 "https://311.boston.gov/tickets/" . $record->case_enquiry_id,
                 $status,
                 $color,
+                $record->location,
+                $record->open_dt,
+                $record->closed_dt,
             ],
             $template
         );
