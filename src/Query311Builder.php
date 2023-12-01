@@ -33,7 +33,16 @@ class Query311Builder
         // Option 2
         $location = $this->submittedParams['address-contains'];
 
-        if ($location) {
+        if ($zipCode) {
+        $query = $this->factory->select($year . '.*')
+            ->from($year)
+            ->where(search('case_title')->contains(urlencode($caseTitleContains)))
+            ->andWhere(field('location_zipcode')->eq($zipCode))
+            ->andWhere(field('open_dt')->gte($after))
+            ->andWhere(field('open_dt')->lte($before))
+            ->compile();
+        }
+        elseif ($location) {
             $searchType = array_key_exists('address-search-type', $this->submittedParams) ? 'contains' : 'begins';
             $query = $this->factory->select($year . '.*')
                 ->from($year)
@@ -42,21 +51,16 @@ class Query311Builder
                 ->andWhere(field('open_dt')->lte($before))
                 ->compile();
         }
-        elseif ($zipCode) {
+        else {
             $query = $this->factory->select($year . '.*')
                 ->from($year)
                 ->where(search('case_title')->contains(urlencode($caseTitleContains)))
-                ->andWhere(field('location_zipcode')->eq($zipCode))
                 ->andWhere(field('open_dt')->gte($after))
                 ->andWhere(field('open_dt')->lte($before))
                 ->compile();
         }
-        else {
-            throw new \Exception('Missing either zip or address');
-        }
 
         $query = $this->insertParams($query->sql(), $query->params());
-
         return $query;
     }
 
@@ -70,25 +74,6 @@ class Query311Builder
         }
 
         return $sqlQuery;
-    }
-
-    private function getType(): ?string
-    {
-        if (array_key_exists('search', $this->submittedParams)) {
-            return 'search';
-        }
-        if (array_key_exists('by-address', $this->submittedParams)) {
-            return 'by-address';
-        }
-        return null;
-    }
-
-    private function getIsCount(): bool
-    {
-        if (array_key_exists('count', $this->submittedParams)) {
-            return true;
-        }
-        return false;
     }
 
 }

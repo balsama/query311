@@ -6,7 +6,8 @@
         "balsama/fetch": "dev-main",
         "envms/fluentpdo": "dev-master",
         "ext-pdo": "*",
-        "latitude/latitude": "dev-master"
+        "latitude/latitude": "dev-master",
+        "symfony/yaml": "6.4.x-dev"
     },
     "autoload": {
         "psr-4": {

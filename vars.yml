@@ -1,0 +1,66 @@
+report_category_map:
+  0: Any
+  Bicycle: Abandoned Bicycle
+  Building: Abandoned Building
+  Vehicle: Abandoned Vehicle
+  Bugs: Bed Bugs
+  Broken Park Equipment: Broken Park Equipment
+  Sidewalk: Broken Sidewalk
+  Building Inspection Request: Building Inspection Request
+  BWSC: BWSC
+  atchbasin: Catchbasin
+  E Collection: Code Enforcement Collection
+  emetery Maintenance Request: Cemetery Maintenance Request
+  omplaint: Complaint/Contractor Complaint
+  onstruction Debris: Construction Debris
+  Exceeding Terms of Permit: Exceeding Terms of Permit
+  Fire: Fire Department Request
+  General: General
+  Graffiti: Graffiti
+  Ground Maintenance: Ground Maintenance
+  Heat: Heat (Excessive, Insufficient)
+  Hero Square Sign Request: Hero Square Sign Request
+  HP Sign: HP Sign
+  Illegal Dumping: Illegal Dumping
+  Parking: Illegal Parking
+  Improper Storage of Trash (Barrels): Improper Storage of Trash (Barrels)
+  Litter: Litter
+  Mice: Mice Infestation (Residential)
+  Missed: Missed Trash or Recycling
+  Missing Sign: Missing Sign
+  Needle: Needle Clean-up
+  New Sign: New Sign, Crosswalk or Marking
+  New Tree: New Tree Requests
+  Notification: Notification
+  Other: Other
+  Park: Park Maintenance
+  Pigeon: Pigeon Infestation
+  Poor Conditions of Property: Poor Conditions of Property
+  Pothole: Pothole
+  Protection of Adjoining Property: Protection of Adjoining Property
+  Public Events: Public Events Noise Disturbances
+  Public Works: Public Works General Request
+  Rat: Rat
+  Recycling Cart: Recycling Cart
+  Plowing: Roadway Plowing/Salting
+  Rodent: Rodent Sighting
+  Bulk Item: Schedule a Bulk Item Pickup
+  Senior Shoveling: Senior Shoveling
+  Sewage: Sewage/Septic Back-Up
+  Short Term Rental: Short Term Rental
+  Snow: Snow
+  Space Savers: Space Savers
+  Squalid: Squalid Living Conditions
+  Street Light: Street Lights
+  Move-In: Student Move-In Issues
+  Traffic Signal: Traffic Signal
+  Trash: Trash
+  Tree Emergencies: Tree Emergencies
+  Unsafe: Unsafe Dangerous Conditions
+  Unsanitary: Unsanitary Conditions
+  Unsatisfactory: Unsatisfactory Living Conditions
+  Valet: Valet Parking Problems
+  Work Hours: Work Hours-Loud Noise Complaints
+  Work w/out Permit: Work w/out Permit
+  Working Beyond Hours: Working Beyond Hours
+  Zoning: Zoning

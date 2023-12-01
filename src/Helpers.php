@@ -2,6 +2,8 @@
 
 namespace Balsama\Query311;
 
+use Symfony\Component\Yaml\Yaml;
+
 class Helpers
 {
     const YEAR_UUID_MAP = [
@@ -13,6 +15,26 @@ class Helpers
         2018 => '2be28d90-3a90-4af1-a3f6-f28c1e25880a',
         2017 => '30022137-709d-465e-baae-ca155b51927d',
     ];
+
+    public static function getVars(): array
+    {
+        $vars = Yaml::parseFile(__DIR__ . '/../vars.yml');
+        return $vars;
+    }
+
+    public static function getCategoryOptionsHtml(): string
+    {
+        $optionsMap = self::getVars()['report_category_map'];
+        $template = '<option value="%s">%s</option>';
+        foreach ($optionsMap as $key => $value) {
+            $htmlOptions[] = sprintf(
+                $template,
+                $key,
+                $value,
+            );
+        }
+        return implode("\n", $htmlOptions);
+    }
 
     public static function getYearUuid(int $year): string
     {

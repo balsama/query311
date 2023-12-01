@@ -78,75 +78,7 @@ use Balsama\Query311\Helpers;
                     </div>
                        <div class="form-floating">
                         <select class="form-select" aria-label="case-title-contains" name="case-title-contains" id="case-title-contains">
-                            <option selected="selected" value="">- Any -</option>
-                            <option value="Bicycle">Abandoned Bicycle</option>
-                            <option value="Building">Abandoned Building</option>
-                            <option value="Vehicle">Abandoned Vehicle</option>
-                            <option value=" Bugs">Bed Bugs</option>
-                            <option value="Broken Park Equipment">Broken Park Equipment</option>
-                            <option value="Sidewalk">Broken Sidewalk</option>
-                            <option value="Building Inspection Request">Building Inspection Request</option>
-                            <option value="BWSC">BWSC</option>
-                            <option value="atchbasin">Catchbasin</option>
-                            <option value="E Collection">Code Enforcement Collection</option>
-                            <option value="emetery Maintenance Request">Cemetery Maintenance Request</option>
-                            <option value="omplaint">Complaint/Contractor Complaint</option>
-                            <option value="onstruction Debris">Construction Debris</option>
-                            <option value="Damaged Sign">Damaged Sign</option>
-                            <option value="Dead Tree Removal">Dead Tree Removal</option>
-                            <option value="Exceeding Terms of Permit">Exceeding Terms of Permit</option>
-                            <option value="Fire">Fire Department Request</option>
-                            <option value="General">General</option>
-                            <option value="Graffiti">Graffiti</option>
-                            <option value="Ground Maintenance">Ground Maintenance</option>
-                            <option value="Heat">Heat (Excessive, Insufficient)</option>
-                            <option value="Hero Square Sign Request">Hero Square Sign Request</option>
-                            <option value="HP Sign">HP Sign</option>
-                            <option value="Illegal Dumping">Illegal Dumping</option>
-                            <option value="Illegal Graffiti">Illegal Graffiti</option>
-                            <option value="Parking">Illegal Parking</option>
-                            <option value="Improper Storage of Trash (Barrels)">Improper Storage of Trash (Barrels)</option>
-                            <option value="Litter">Litter</option>
-                            <option value="Mice">Mice Infestation (Residential)</option>
-                            <option value="Missed">Missed Trash or Recycling</option>
-                            <option value="Missing Sign">Missing Sign</option>
-                            <option value="Needle">Needle Clean-up</option>
-                            <option value="New Sign">New Sign, Crosswalk or Marking</option>
-                            <option value="New Tree">New Tree Requests</option>
-                            <option value="Notification">Notification</option>
-                            <option value="Other">Other</option>
-                            <option value="Park ">Park Maintenance</option>
-                            <option value="Pigeon">Pigeon Infestation</option>
-                            <option value="Poor Conditions of Property">Poor Conditions of Property</option>
-                            <option value="Pothole">Pothole</option>
-                            <option value="Protection of Adjoining Property">Protection of Adjoining Property</option>
-                            <option value="Public Events">Public Events Noise Disturbances</option>
-                            <option value="Public Works">Public Works General Request</option>
-                            <option value="Rat">Rat</option>
-                            <option value="Recycling Cart">Recycling Cart</option>
-                            <option value="Plowing">Roadway Plowing/Salting</option>
-                            <option value="Rodent">Rodent Sighting</option>
-                            <option value="Bulk Item">Schedule a Bulk Item Pickup</option>
-                            <option value="Senior Shoveling">Senior Shoveling</option>
-                            <option value="Sewage">Sewage/Septic Back-Up</option>
-                            <option value="Short Term Rental">Short Term Rental</option>
-                            <option value="Sidewalk">Sidewalk</option>
-                            <option value="Snow">Snow</option>
-                            <option value="Space Savers">Space Savers</option>
-                            <option value="Squalid">Squalid Living Conditions</option>
-                            <option value="Street Light">Street Lights</option>
-                            <option value="Move-In">Student Move-In Issues</option>
-                            <option value="Traffic Signal">Traffic Signal</option>
-                            <option value="Trash">Trash</option>
-                            <option value="Tree Emergencies">Tree Emergencies</option>
-                            <option value="Unsafe">Unsafe Dangerous Conditions</option>
-                            <option value="Unsanitary">Unsanitary Conditions</option>
-                            <option value="Unsatisfactory">Unsatisfactory Living Conditions</option>
-                            <option value="Valet">Valet Parking Problems</option>
-                            <option value="Work Hours">Work Hours-Loud Noise Complaints</option>
-                            <option value="Work w/out Permit">Work w/out Permit</option>
-                            <option value="Working Beyond Hours">Working Beyond Hours</option>
-                            <option value="Zoning">Zoning</option>
+                            <?php echo Helpers::getCategoryOptionsHtml(); ?>
                         </select>
                         </select>
                         <label class="form-label" for="case-title-contains">Category (optional)</label>

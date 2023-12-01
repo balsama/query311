@@ -43,7 +43,7 @@
 <div class="container my-5">
     <h1>About Boston 311 records search</h1>
     <p class="fs-5">This site helps you to search Boston's 311 records.</p>
-    <p>It directly queries the 311 Service Requests dataset from data.boston.gov via the CKAN Data API provided by the City.</p>
+    <p>It directly queries the 311 Service Requests dataset from data.boston.gov via the <a href="https://data.boston.gov/api/1/util/snippet/api_info.html?resource_id=e6013a93-1321-4f2a-bf91-8d8a02f1e62f">CKAN Data API</a> provided by the City.</p>
     <h3>Limitations</h3>
     <ul>
         <li><strong>Available fields</strong>: The City doesn't provide certain fields such as the original description or the submitted photo via the API. So you can't search for text that used by the submitter.</li>

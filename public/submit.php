@@ -5,6 +5,10 @@ include_once __DIR__ . "/../vendor/autoload.php";
 use Balsama\Fetch;
 use Balsama\Query311\Query311Builder;
 
+if (!array_key_exists('table', $_GET)) {
+    return print "<h1>Search Boston 311</h1><p>Error: no form data provided.</p><p>Use the <a href='index.php'>form</a> to search.</p>";
+}
+
 $query = new Query311Builder($_GET);
 $sql = $query->getQuery();
 
@@ -55,22 +59,25 @@ EOD;
 </head>
 <body class="d-flex flex-column h-100">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<div class="container">
-    <a class="navbar-brand" href="index.php">Boston 311 Record Search</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.php">Search by Zip Code and Case title</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="by-address.php">Search by address</a>
-            </li>
-        </ul>
+    <div class="container">
+        <a class="navbar-brand" href="index.php">
+            <img src="favicon/logo-light.png" alt="Bootstrap" width="40" height="40">
+        </a>
+        <a class="navbar-brand" href="index.php">Boston 311 Record Search</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.php">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.php">About</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 </nav>
 <main class="flex-shrink-0">
 <div class="container">
@@ -83,6 +90,8 @@ EOD;
         $image = !$record->closed_photo ? 'https://placehold.co/600x400?text=Bos+311' : $record->closed_photo;
         $status = $record->case_status;
         $color = $status === 'Closed' ? 'success' : 'warning';
+        preg_match('/Case Closed\. Closed date : \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{1,3} /', $record->closure_reason, $matches);
+        $closedNotes = $matches ? substr($record->closure_reason, strlen($matches[0])) : $record->closure_reason;
         $item = str_replace(
             [
                 '{{IMAGE}}',
@@ -98,7 +107,7 @@ EOD;
             [
                 $image,
                 $record->type,
-                $record->closure_reason,
+                $closedNotes,
                 "https://311.boston.gov/tickets/" . $record->case_enquiry_id,
                 $status,
                 $color,
@@ -116,4 +125,3 @@ EOD;
 </main>
 </body>
 </html>
-
