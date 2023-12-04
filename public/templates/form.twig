@@ -1,0 +1,60 @@
+<form method="get" enctype="multipart/form-data" action="results.php" name="type">
+
+    <div class="form-floating">
+        <select class="form-select form-select-lg mb-3" name="table" id="yearselect" aria-label="Default select example" onchange="updateDateFields(event)">
+            {{ year_options|raw }}
+        </select>
+        <label class="form-label" for="yearselect">Year to search</label>
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active show" id="home-tab" data-bs-toggle="tab" data-bs-target="#tab_zip" type="button" role="tab" aria-controls="tab_zip" aria-selected="true">Search within Zip Code</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#tab_address" type="button" role="tab" aria-controls="tab_address" aria-selected="false">Search by Address</button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane active" id="tab_zip" role="tabpanel" aria-labelledby="home-tab">
+            <div class="input-group mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Zip code" aria-label="zip-code" name="zip-code" id="zip-code">
+                    <label class="form-label" for="case-title-contains">Zip code</label>
+                </div>
+                <div class="form-floating">
+                    <select class="form-select" aria-label="case-title-contains" name="case-title-contains" id="case-title-contains">
+                        {{ category_options|raw }}
+                    </select>
+                    </select>
+                    <label class="form-label" for="case-title-contains">Category (optional)</label>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="tab_address" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" placeholder="Address contains" aria-label="address-contains" name="address-contains" id="address-contains">
+                <label class="form-label" for="address-contains">Address (starts with)</label>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="address-search-type" name="address-search-type">
+                    <label class="form-check-label" for="address-search-type">Address "contains" (default: "starts with")</label>
+                </div>
+                <small class="text-muted">Case sensitive. Try <code>36 Hull</code> or <code>55 Boutwell</code>, for example</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="form-floating">
+            <input type="date" class="form-control" value="2023-01-01" aria-label="date-after" name="date-after" id="date-after">
+            <label class="form-label" for="date-after">Date is after (must be within year selected above)</label>
+        </div>
+        <div class="form-floating">
+            <input type="date" class="form-control" value="2023-12-31" aria-label="date-before" name="date-before" id="date-before">
+            <label class="form-label" for="date-before">...and date is before</label>
+        </div>
+    </div>
+
+    <button class="btn btn-primary btn-lg" type="submit" value="search">Search</button>
+    <a href="index.php" class="btn btn-outline-primary btn-lg">Reset</a>
+</form>

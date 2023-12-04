@@ -1,3 +1,4 @@
+debug: true
 report_category_map:
   0: Any
   Bicycle: Abandoned Bicycle
