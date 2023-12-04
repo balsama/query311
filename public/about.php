@@ -1,48 +1,28 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About Boston 311 Search</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="@balsama" />
-    <meta name="twitter:creator" content="@balsama" />
-    <meta property="og:url" content="http://localhost/query311/public/" />
-    <meta property="og:title" content="Boston 311 Records Search" />
-    <meta property="og:description" content="A tool to help you to search Boston's 311 records." />
-    <meta property="og:image" content="https://query311-41292d25d8ea.herokuapp.com/favicon/311Query.png" />
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="index.php">
-            <img src="favicon/logo-light.png" alt="Bootstrap" width="40" height="40">
-        </a>
-        <a class="navbar-brand" href="index.php">Boston 311 Record Search</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php">Search</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about.php">About</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php
 
-<div class="container my-5">
-    <h1>About Boston 311 records search</h1>
-    <p class="fs-5">This site helps you to search Boston's 311 records.</p>
+use Balsama\Fetch;
+use Balsama\Query311\Helpers;
+use Balsama\Query311\Query311Builder;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$loader = new FilesystemLoader('templates');
+$twig = new Environment($loader, [
+    'cache' => __DIR__ . '/../twig-cache',
+    'debug' => Helpers::getVars()['debug'],
+]);
+
+$page_template = $twig->load('page.twig');
+$nav_template = $twig->load('nav.twig');
+$nav = $nav_template->render([
+    'l1_classes' => 'nav-link',
+    'l2_classes' => 'nav-link active',
+]);
+
+$body = <<<EOD
+    <p class="fs-5">This site helps you search Boston's 311 records.</p>
     <p>It directly queries the 311 Service Requests dataset from data.boston.gov via the <a href="https://data.boston.gov/api/1/util/snippet/api_info.html?resource_id=e6013a93-1321-4f2a-bf91-8d8a02f1e62f">CKAN Data API</a> provided by the City.</p>
     <h3>Limitations</h3>
     <ul>
@@ -54,9 +34,11 @@
         <li><strong>Bug reports</strong>: File bug reports and feature requests via the <a href="https://github.com/balsama/query311">GitHub Repo</a></li>
         <li><strong>Contact</strong>: Contact the developer via <a href="https://twitter.com/balsama">Twitter</a>.</li>
     </ul>
-</div>
+EOD;
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-<script src="main.js"></script>
-</body>
-</html>
+echo $page_template->render([
+    'page_title' => 'About Boston 311 records search',
+    'nav' => $nav,
+    'title' => 'Results',
+    'body' => $body,
+]);
