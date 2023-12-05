@@ -4,11 +4,11 @@
     "type": "project",
     "require": {
         "balsama/fetch": "dev-main",
-        "envms/fluentpdo": "dev-master",
+        "envms/fluentpdo": "^2",
         "ext-pdo": "*",
-        "latitude/latitude": "dev-master",
-        "symfony/yaml": "6.4.x-dev",
-        "twig/twig": "3.x-dev"
+        "latitude/latitude": "^4",
+        "symfony/yaml": "^6",
+        "twig/twig": "^3"
     },
     "autoload": {
         "psr-4": {
@@ -16,6 +16,7 @@
         }
     },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "require-dev": {
         "phpunit/phpunit": "^10.4@dev"
     }
