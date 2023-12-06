@@ -33,9 +33,9 @@
         <div class="tab-pane" id="tab_address" role="tabpanel" aria-labelledby="profile-tab">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" placeholder="Address contains" aria-label="address-contains" name="address-contains" id="address-contains">
-                <label class="form-label" for="address-contains">Address (starts with)</label>
+                <label class="form-label" for="address-contains" id="address-contains-label">Address (starts with)</label>
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="address-search-type" name="address-search-type">
+                    <input class="form-check-input" type="checkbox" role="switch" id="address-search-type" name="address-search-type" onchange="updateAddressLabel(event)">
                     <label class="form-check-label" for="address-search-type">Address "contains" (default: "starts with")</label>
                 </div>
                 <small class="text-muted">Case sensitive. Try <code>36 Hull</code> or <code>55 Boutwell</code>, for example</small>
