@@ -70,10 +70,15 @@ class Query311Builder
         foreach ($sqlParams as $sqlParam) {
             $pos = strpos($sqlQuery, $replaceStr);
             if ($pos !== false) {
-                $sqlQuery = substr_replace($sqlQuery, "'" . $sqlParam . "'", $pos, strlen($replaceStr));
+                $sqlQuery = substr_replace($sqlQuery, "'" . urlencode($sqlParam) . "'", $pos, strlen($replaceStr));
             }
         }
 
         return $sqlQuery;
+    }
+
+    private function urlEncodeSpecialChars(string $string, array $search = ['%'], array $replace = ['%25']): string
+    {
+
     }
 }

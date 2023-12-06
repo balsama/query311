@@ -39,6 +39,16 @@ class QueryTest extends TestCase
         'date-before' => '2023-12-31',
     ];
 
+    public static array $addressContainsEncodedCharFormData = [
+        'table' => '2023',
+        'zip-code' => '',
+        'case-title-contains' => '0',
+        'address-contains' => '20 Sheafe',
+        'address-search-type' => 'on',
+        'date-after' => '2023-01-01',
+        'date-before' => '2023-12-31',
+    ];
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -59,13 +69,9 @@ class QueryTest extends TestCase
         $query = new Query311Builder($queryParameters);
         $sql = $query->getQuery();
         $expected = <<<EOD
-SELECT "e6013a93-1321-4f2a-bf91-8d8a02f1e62f".* FROM "e6013a93-1321-4f2a-bf91-8d8a02f1e62f" WHERE "case_title" LIKE '%Bicycle%' AND "location_zipcode" = '02113' AND "open_dt" >= '2023-01-01T00:00:00-05:00' AND "open_dt" <= '2023-12-31T00:00:00-05:00'
+SELECT "e6013a93-1321-4f2a-bf91-8d8a02f1e62f".* FROM "e6013a93-1321-4f2a-bf91-8d8a02f1e62f" WHERE "case_title" LIKE '%25Bicycle%25' AND "location_zipcode" = '02113' AND "open_dt" >= '2023-01-01T00%3A00%3A00-05%3A00' AND "open_dt" <= '2023-12-31T00%3A00%3A00-05%3A00'
 EOD;
-
-        $this->assertEquals(
-            $expected,
-            $sql
-        );
+        $this->assertEquals($expected, $sql);
     }
 
     public function testAddressStartsWithForm()
@@ -74,7 +80,7 @@ EOD;
         $query = new Query311Builder($queryParameters);
         $sql = $query->getQuery();
         $expected = <<<EOD
-SELECT "e6013a93-1321-4f2a-bf91-8d8a02f1e62f".* FROM "e6013a93-1321-4f2a-bf91-8d8a02f1e62f" WHERE "location" LIKE '36 Hull%' AND "open_dt" >= '2023-01-01T00:00:00-05:00' AND "open_dt" <= '2023-12-31T00:00:00-05:00'
+SELECT "e6013a93-1321-4f2a-bf91-8d8a02f1e62f".* FROM "e6013a93-1321-4f2a-bf91-8d8a02f1e62f" WHERE "location" LIKE '36+Hull%25' AND "open_dt" >= '2023-01-01T00%3A00%3A00-05%3A00' AND "open_dt" <= '2023-12-31T00%3A00%3A00-05%3A00'
 EOD;
 
         $this->assertEquals(
@@ -85,17 +91,21 @@ EOD;
 
     public function testAddressContainsForm()
     {
+        $queryParameters = new QueryParameters(self::$addressContainsEncodedCharFormData);
+        $query = new Query311Builder($queryParameters);
+        $sql = $query->getQuery($queryParameters);
+        $expected = <<<EOD
+SELECT "e6013a93-1321-4f2a-bf91-8d8a02f1e62f".* FROM "e6013a93-1321-4f2a-bf91-8d8a02f1e62f" WHERE "location" LIKE '%2520+Sheafe%25' AND "open_dt" >= '2023-01-01T00%3A00%3A00-05%3A00' AND "open_dt" <= '2023-12-31T00%3A00%3A00-05%3A00'
+EOD;
+        $this->assertEquals($expected, $sql);
+
         $queryParameters = new QueryParameters(self::$addressContainsFormData);
         $query = new Query311Builder($queryParameters);
         $sql = $query->getQuery();
         $expected = <<<EOD
-SELECT "e6013a93-1321-4f2a-bf91-8d8a02f1e62f".* FROM "e6013a93-1321-4f2a-bf91-8d8a02f1e62f" WHERE "location" LIKE '%36 Hull%' AND "open_dt" >= '2023-01-01T00:00:00-05:00' AND "open_dt" <= '2023-12-31T00:00:00-05:00'
+SELECT "e6013a93-1321-4f2a-bf91-8d8a02f1e62f".* FROM "e6013a93-1321-4f2a-bf91-8d8a02f1e62f" WHERE "location" LIKE '%2536+Hull%25' AND "open_dt" >= '2023-01-01T00%3A00%3A00-05%3A00' AND "open_dt" <= '2023-12-31T00%3A00%3A00-05%3A00'
 EOD;
-
-        $this->assertEquals(
-            $expected,
-            $sql
-        );
+        $this->assertEquals(trim($expected), $sql);
     }
 
     public static function getSampleQueryParameters(): QueryParameters
