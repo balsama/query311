@@ -3,6 +3,7 @@
 use Balsama\Fetch;
 use Balsama\Query311\Helpers;
 use Balsama\Query311\Query311Builder;
+use Balsama\Query311\QueryParameters;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -31,7 +32,8 @@ if (!array_key_exists('table', $_GET)) {
     return print "<h1>Search Boston 311</h1><p>Error: no form data provided.</p><p>Use the <a href='index.php'>form</a> to search.</p>";
 }
 
-$query = new Query311Builder($_GET);
+$queryParameters = new QueryParameters($_GET);
+$query = new Query311Builder($queryParameters);
 $sql = $query->getQuery();
 
 $url = "https://data.boston.gov/api/3/action/datastore_search_sql?sql=" . $sql;
@@ -47,6 +49,7 @@ $body_top = "<p><strong class='text-primary'>$count</strong> records match your 
 
 
 $card_template = $twig->load('card.twig');
+$cards = [];
 foreach ($records as $record) {
     preg_match('/Case Closed\. Closed date : \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{1,3} /', $record->closure_reason, $matches);
     $closedNotes = $matches ? substr($record->closure_reason, strlen($matches[0])) : $record->closure_reason;

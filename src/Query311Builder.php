@@ -11,53 +11,54 @@ use function Latitude\QueryBuilder\func;
 
 class Query311Builder
 {
-    private array $submittedParams;
+    private QueryParameters $queryParameters;
     private QueryFactory $factory;
 
-    public function __construct(array $post)
+    public function __construct(QueryParameters $queryParameters)
     {
-        $this->submittedParams = $post;
+        $this->queryParameters = $queryParameters;
         $this->factory = new QueryFactory(new CommonEngine());
     }
 
     public function getQuery(): string
     {
-        $year = Helpers::getYearUuid($this->submittedParams['table']);
-        $after = $this->submittedParams['date-after'];
-        $before = $this->submittedParams['date-before'];
+        $year = Helpers::getYearUuid($this->queryParameters->year);
+        $after = $this->queryParameters->after->format($this->queryParameters->after::ATOM);
+        $before = $this->queryParameters->before->format($this->queryParameters->before::ATOM);
 
-        // Option 1
-        $zipCode = $this->submittedParams['zip-code'];
-        $caseTitleContains = $this->submittedParams['case-title-contains'];
+        switch ($this->queryParameters->formFlavor) {
+            case 'ZIP_PLUS_CATEGORY':
+                $zipCode = $this->queryParameters->zip;
+                $caseTitleContains = $this->queryParameters->titleSearchString;
 
-        // Option 2
-        $location = $this->submittedParams['address-contains'];
+                $query = $this->factory->select($year . '.*')
+                    ->from($year)
+                    ->where(search('case_title')->contains(urlencode($caseTitleContains)))
+                    ->andWhere(field('location_zipcode')->eq($zipCode))
+                    ->andWhere(field('open_dt')->gte($after))
+                    ->andWhere(field('open_dt')->lte($before))
+                    ->compile();
+                break;
+            case 'ADDRESS':
+                $location = $this->queryParameters->address;
 
-        if ($zipCode) {
-        $query = $this->factory->select($year . '.*')
-            ->from($year)
-            ->where(search('case_title')->contains(urlencode($caseTitleContains)))
-            ->andWhere(field('location_zipcode')->eq($zipCode))
-            ->andWhere(field('open_dt')->gte($after))
-            ->andWhere(field('open_dt')->lte($before))
-            ->compile();
-        }
-        elseif ($location) {
-            $searchType = array_key_exists('address-search-type', $this->submittedParams) ? 'contains' : 'begins';
-            $query = $this->factory->select($year . '.*')
-                ->from($year)
-                ->where(search('location')->$searchType($location))
-                ->andWhere(field('open_dt')->gte($after))
-                ->andWhere(field('open_dt')->lte($before))
-                ->compile();
-        }
-        else {
-            $query = $this->factory->select($year . '.*')
-                ->from($year)
-                ->where(search('case_title')->contains(urlencode($caseTitleContains)))
-                ->andWhere(field('open_dt')->gte($after))
-                ->andWhere(field('open_dt')->lte($before))
-                ->compile();
+                $searchType = ($this->queryParameters->searchAddressByContains) ? 'contains' : 'begins';
+                $query = $this->factory->select($year . '.*')
+                    ->from($year)
+                    ->where(search('location')->$searchType($location))
+                    ->andWhere(field('open_dt')->gte($after))
+                    ->andWhere(field('open_dt')->lte($before))
+                    ->compile();
+                break;
+            default:
+                $caseTitleContains = $this->queryParameters->titleSearchString;
+                $query = $this->factory->select($year . '.*')
+                    ->from($year)
+                    ->where(search('case_title')->contains(urlencode($caseTitleContains)))
+                    ->andWhere(field('open_dt')->gte($after))
+                    ->andWhere(field('open_dt')->lte($before))
+                    ->compile();
+                throw new \Exception('Unknown form flavor');
         }
 
         $query = $this->insertParams($query->sql(), $query->params());
@@ -75,5 +76,4 @@ class Query311Builder
 
         return $sqlQuery;
     }
-
 }
