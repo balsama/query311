@@ -58,7 +58,7 @@ foreach ($records as $record) {
         'IMAGE' => !$record->closed_photo ? 'https://placehold.co/600x400?text=Bos+311' : $record->closed_photo,
         'TITLE'=> $record->type,
         'BODY' => $closedNotes,
-        'LINK' => "https://311.boston.gov/tickets/" . $record->case_enquiry_id,
+        'RECORD_ID' => $record->case_enquiry_id,
         'STATUS' => $record->case_status,
         'COLOR' => $record->case_status === 'Closed' ? 'success' : 'warning',
         'ADDRESS' => $record->location,
