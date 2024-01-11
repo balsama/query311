@@ -7,6 +7,7 @@ use Symfony\Component\Yaml\Yaml;
 class Helpers
 {
     const YEAR_UUID_MAP = [
+        2024 => 'dff4d804-5031-443a-8409-8344efd0e5c8',
         2023 => 'e6013a93-1321-4f2a-bf91-8d8a02f1e62f',
         2022 => '81a7b022-f8fc-4da5-80e4-b160058ca207',
         2021 => 'f53ebccd-bc61-49f9-83db-625f209c95f5',
