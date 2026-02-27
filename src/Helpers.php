@@ -7,6 +7,8 @@ use Symfony\Component\Yaml\Yaml;
 class Helpers
 {
     const YEAR_UUID_MAP = [
+        // Get the year UUID from https://data.boston.gov/dataset/311-service-requests
+        2026 => '1a0b420d-99f1-4887-9851-990b2a5a6e17',
         2025 => '9d7c2214-4709-478a-a2e8-fb2020a5bb94',
         2024 => 'dff4d804-5031-443a-8409-8344efd0e5c8',
         2023 => 'e6013a93-1321-4f2a-bf91-8d8a02f1e62f',

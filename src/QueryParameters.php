@@ -2,8 +2,6 @@
 
 namespace Balsama\Query311;
 
-use mysql_xdevapi\Exception;
-
 class QueryParameters
 {
     public int $year;
